@@ -1,23 +1,55 @@
 {
-  "name": "webserver",
+  "name": "react_boilerplate",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
-    "build": "babel server/src -d server/public",
-    "build-watch": "babel server/src -d server/public --watch",
-    "start-dev": "npm run build-watch | nodemon server/server.js",
-    "start": "node server/server.js"
+    "build:dev": "node_modules/.bin/webpack --watch --env development",
+    "build:prod": "node_modules/.bin/webpack --watch -p --env production",
+    "start-dev": "npm run build | nodemon server/server.js",
+    "start": "node server/server.js",
+    "test": "jest --config=jest.config.json"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.2"
+    "enzyme": "^3.0.0",
+    "enzyme-adapter-react-16": "^1.0.0",
+    "enzyme-to-json": "^3.0.1",
+    "express": "^4.16.2",
+    "identity-obj-proxy": "^3.0.0",
+    "lodash.clonedeep": "^4.5.0",
+    "moment": "^2.20.1",
+    "normalize.css": "^7.0.0",
+    "raf": "^3.3.2",
+    "react": "^16.2.0",
+    "react-addons-shallow-compare": "^15.6.2",
+    "react-dates": "^12.7.0",
+    "react-dom": "^16.2.0",
+    "react-modal": "^3.1.10",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
+    "react-test-renderer": "^16.0.0",
+    "redux": "^3.7.2",
+    "shallow-compare": "^1.2.2",
+    "uuid": "^3.1.0"
   },
   "devDependencies": {
+    "@types/jest": "^22.0.1",
     "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
-    "nodemon": "^1.12.1"
+    "css-loader": "^0.28.7",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "jest": "^22.1.1",
+    "node-sass": "^4.7.2",
+    "nodemon": "^1.12.1",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.1",
+    "webpack": "^3.10.0"
   }
 }

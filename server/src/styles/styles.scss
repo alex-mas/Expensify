@@ -1,0 +1,31 @@
+/*
+Importing styles is done with @import 'relativePath/file'
+
+where relativePath is the relative path to the file and the file 
+is the scss file stripped of its leading underscore and the file extension 
+--> _base.scss becomes --> base
+--> _header.scss becomes --> header
+
+
+SCSS syntax: check its page documentation(http://sass-lang.com/guide) but most important stuff is
+ 
+@import: to import partial styles giving you the ability to properly structure your styles in function of their scope
+
+$variableName: defines a variable that on compilation will get injected as a constant to all selectors using it
+
+@extend: lets a selector extend a base selector styles copying all whats defined in the parent and extending it with its own styles
+
+@mixin: sort of functions to inject variable styles to diferent elements on compilation
+EXAMPLE:
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.box { @include border-radius(10px); }
+
+*/
+@import './base/settings';
+@import './base/base';

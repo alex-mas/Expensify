@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ErrorNotFound component unit tests should render ErrorNotFound correctly 1`] = `
+<div>
+   404 dude you fucked up big time, try again
+</div>
+`;
