@@ -2,3 +2,4 @@ node_modules/*
 .vscode/*
 notes.js
 server/src/tests/reactTesting.notes.js
+pubic/dist/*

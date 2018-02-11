@@ -13,9 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.0.0",
-    "enzyme-to-json": "^3.0.1",
     "express": "^4.16.2",
     "identity-obj-proxy": "^3.0.0",
     "lodash.clonedeep": "^4.5.0",
@@ -29,12 +27,14 @@
     "react-modal": "^3.1.10",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
-    "react-test-renderer": "^16.0.0",
     "redux": "^3.7.2",
     "shallow-compare": "^1.2.2",
     "uuid": "^3.1.0"
   },
   "devDependencies": {
+    "react-test-renderer": "^16.0.0",
+    "enzyme": "^3.0.0",
+    "enzyme-to-json": "^3.0.1",
     "@types/jest": "^22.0.1",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",

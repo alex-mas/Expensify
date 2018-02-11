@@ -9,7 +9,7 @@ module.exports = (env, argv)=>{
     entry: './server/src/app.js',
     //settings of output file, that is, path where it will be located and filename
     output: {
-      path: path.join(__dirname, '/server/public'),
+      path: path.join(__dirname, '/server/public/dist'),
       filename: 'app.js'
     },
     //sort of modifications we can apply to files processed by webpack conditionally

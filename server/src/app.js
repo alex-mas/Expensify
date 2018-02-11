@@ -25,14 +25,14 @@ store.dispatch(addExpense({description: 'boats again', amount: 70,createdAt: 24}
 store.dispatch(addExpense({description: 'boats', amount: 15000,createdAt: 27}));
 
 store.dispatch(setTextFilter('boat'));
-/*
-store.dispatch(setStartDate(0));
-store.dispatch(setEndDate(20));
+
+store.dispatch(setStartDate(moment(0)));
+store.dispatch(setEndDate(moment(16)));
 
 setTimeout(()=>{
-    store.dispatch(setEndDate(250000000000000000));
+    store.dispatch(setEndDate(moment(50000)));
 },5000)
-*/
+
 const state = store.getState();
 
 const appRoot = document.getElementById('app');
