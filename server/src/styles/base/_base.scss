@@ -3,14 +3,19 @@ html {
 }
 
 body {
+    color: $dark-grey;
     font-family: Helvetica, Arial, sans-serif;
     font-size: $m-size;//16 pixels
+    line-height: 1.6;
 }
 button{
     cursor: pointer;
 
 }
 
+*{
+    box-sizing: border-box;
+}
 
 button:disabled{
     cursor: default;

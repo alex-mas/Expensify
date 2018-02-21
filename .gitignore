@@ -3,3 +3,5 @@ node_modules/*
 notes.js
 server/src/tests/reactTesting.notes.js
 pubic/dist/*
+.env.test
+.env.development

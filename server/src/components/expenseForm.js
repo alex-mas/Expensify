@@ -1,22 +1,17 @@
 import React from 'react';
 import moment from 'moment';
+import {connect} from 'react-redux';
 import { SingleDatePicker } from 'react-dates';
+import { removeExpense } from '../actions/expenses';
 import 'react-dates/lib/css/_datepicker.css';
 
 
 
-/*
 
-Form component that implements the logic to create new expenses and also adds
-the logic required to ensure that the input of the form is in line with what
-we expect in our data moldel
+//Form to create expenses + input validation/sanitization
+export class ExpenseForm extends React.Component {
 
-TL:DR Form to create expenses + input validation/sanitization
-
-*/
-export default class ExpenseForm extends React.Component {
-
-    constructor(props){
+    constructor(props) {
         super(props);
         const exists = Boolean(props.expense);
         this.state = {
@@ -24,9 +19,10 @@ export default class ExpenseForm extends React.Component {
             note: exists ? props.expense.note : '',
             //format the property so it matches regexp requirements
             amount: exists ? (props.expense.amount / 100).toString() : '',
-            createdAt: exists ? moment(props.expense.createdAt)  : moment(),
+            createdAt: exists ? moment(props.expense.createdAt) : moment(),
             calendarFocused: false,
-            submitError: ''
+            submitError: '',
+            mode: props.mode ? props.mode : 'create'
         };
     }
 
@@ -50,76 +46,103 @@ export default class ExpenseForm extends React.Component {
     };
     onDateChange = (createdAt) => {
         //check that user hasn't deleted the date
-        if(createdAt){
+        if (createdAt) {
             this.setState(() => ({ createdAt }));
         }
-       
+
     };
     onFocusChange = ({ focused }) => {
         this.setState(() => ({ calendarFocused: focused }));
     };
-    onSubmit = (e)=>{
+    onSubmit = (e) => {
         e.preventDefault();
         //check for missing properties
-        if(!this.state.description || !this.state.amount){
-            this.setState(()=>({
-                submitError:'Please provide amount and description before submiting'
+        if (!this.state.description || !this.state.amount) {
+            this.setState(() => ({
+                submitError: 'Please provide amount and description before submiting'
             }));
-        }else{
+        } else {
             //clear error message as the provided props are correct
-            this.setState(()=>({
-                submitError:''
+            this.setState(() => ({
+                submitError: ''
             }));
             //pass the event up to the parent element who decides what to do with it
             this.props.onSubmit({
                 description: this.state.description,
-                amount: parseFloat(this.state.amount, 10)*100,
+                amount: parseFloat(this.state.amount, 10) * 100,
                 createdAt: this.state.createdAt.valueOf(),
-                note:this.state.note
+                note: this.state.note
 
             })
-            
+
         }
+    }
+    onRemove = (e) => {
+        e.preventDefault();
+        this.props.removeExpense({ id: this.props.expense.id });
+        this.props.history.push('/dashboard');
     }
     /* Component rendering */
     render() {
         return (
-            <div>
+            <form className="form" onSubmit={this.onSubmit}>
                 {this.state.submitError ?
-                <p>{this.state.submitError}</p>
-                : undefined}
-                <form onSubmit={this.onSubmit}>
-                    <input
-                        type="text"
-                        placeholder="description"
-                        autoFocus
-                        value={this.state.description}
-                        onChange={this.onDescriptionChange}
-                    />
-                    <input
-                        type="text"
-                        placeholder="Amount"
-                        value={this.state.amount}
-                        onChange={this.onAmountChange}
-                    />
-                    <SingleDatePicker
-                        date={this.state.createdAt}
-                        onDateChange={this.onDateChange}
-                        focused={this.state.calendarFocused}
-                        onFocusChange={this.onFocusChange}
-                        numberOfMonths={1}
-                        isOutsideRange={() => false}
-                    />
-                    <textarea
-                        placeholder="Add a note for your expense(optional)"
-                        value={this.state.note}
-                        onChange={this.onNoteChange}
-                    >
+                    <p className="form__error">{this.state.submitError}</p>
+                    : undefined}
+                <input
+                    className="text-input"
+                    type="text"
+                    placeholder="description"
+                    autoFocus
+                    value={this.state.description}
+                    onChange={this.onDescriptionChange}
+                />
+                <input
+                    className="text-input"
+                    type="text"
+                    placeholder="Amount"
+                    value={this.state.amount}
+                    onChange={this.onAmountChange}
+                />
+                <SingleDatePicker
+                    date={this.state.createdAt}
+                    onDateChange={this.onDateChange}
+                    focused={this.state.calendarFocused}
+                    onFocusChange={this.onFocusChange}
+                    numberOfMonths={1}
+                    isOutsideRange={() => false}
+                />
+                <textarea
+                    className="text-area"
+                    placeholder="Add a note for your expense(optional)"
+                    value={this.state.note}
+                    onChange={this.onNoteChange}
+                >
 
-                    </textarea>
-                    <button>Add Expense</button>
-                </form>
-            </div>
+                </textarea>
+
+                <div className="spaced__content">
+                    <button className="button">{this.props.mode} Expense</button>
+                    {this.props.mode === 'Edit' ?
+                        <button className="button button__link__dark" onClick={this.onRemove} type="button">Remove</button> :
+                        undefined}
+                </div>
+
+
+
+
+            </form>
         );
     }
 }
+
+
+
+const mapDispatchToProps = (dispatch, props) => ({
+    removeExpense: (data) => dispatch(removeExpense(data))
+})
+
+const bootstraper = function (state, props) {
+    return state;
+}
+export default connect(bootstraper, mapDispatchToProps)(ExpenseForm);

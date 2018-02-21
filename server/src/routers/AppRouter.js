@@ -1,35 +1,38 @@
 /* React */
 import React from 'react';
 import ReactDOM from 'react-dom';
+import createHistory from 'history/createBrowserHistory';
 
 /* External components*/
-import { BrowserRouter, Route, Switch} from 'react-router-dom'
+import { Router, Route, Switch} from 'react-router-dom'
 
 /* Custom components */
-import Header from './../components/header';
+
 import Dashboard from './../components/dashboard';
 import EditExpensePage from './../components/editExpense';
 import CreateExpensePage from './../components/createExpense';
 import HelpPage from './../components/help';
 import ErrorNotFound from './../components/notFound';
+import LoginPage from './../components/login';
+import PrivateRoute from './privateRoute';
+import PublicRoute from './publicRoute';
 
-
-
+export const history = createHistory();
 
 
 const AppRouter = () => (
-    <BrowserRouter>
+    <Router history={history}>
         <div>
-            <Header />
             <Switch>
-                <Route path="/" component={Dashboard} exact={true} />
-                <Route path="/create" component={CreateExpensePage} />
-                <Route path="/edit/:id" component={EditExpensePage} />
+                <PublicRoute path="/" component={LoginPage} exact={true}/>
+                <PrivateRoute path="/dashboard" component={Dashboard} />
+                <PrivateRoute path="/create" component={CreateExpensePage} />
+                <PrivateRoute path="/edit/:id" component={EditExpensePage} />
                 <Route path="/help" component={HelpPage} />
                 <Route component={ErrorNotFound} />
             </Switch>
         </div>
-    </BrowserRouter>
+    </Router>
 );
 
 

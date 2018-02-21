@@ -1,5 +1,6 @@
 import cloneDeep from 'lodash.clonedeep';
 
+
 const defaultExpensesState = [];
 const expensesReducer = (state = defaultExpensesState, action) => {
     switch (action.type) {
@@ -20,8 +21,11 @@ const expensesReducer = (state = defaultExpensesState, action) => {
                 } else {
                     return expense;
                 }
-            })
-
+            });
+        case 'SET_EXPENSES':
+            return action.expenses;
+        case 'RESET_EXPENSES':
+            return [];
         default:
             return state;
     }

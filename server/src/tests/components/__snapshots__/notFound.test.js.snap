@@ -2,6 +2,6 @@
 
 exports[`ErrorNotFound component unit tests should render ErrorNotFound correctly 1`] = `
 <div>
-   404 dude you fucked up big time, try again
+   The requested page couldn't be found try with another page
 </div>
 `;

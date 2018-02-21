@@ -2,29 +2,30 @@ import React from 'react';
 import { connect } from 'react-redux';
 import ExpenseForm from './expenseForm';
 import { editExpense } from '../actions/expenses';
-import { removeExpense } from '../actions/expenses';
+
 
 
 export class EditExpensePage extends React.Component {
     onSubmit = (expense) => {
         this.props.editExpense(this.props.expense.id, expense);
-        this.props.history.push('/');
-    }
-    onRemove = () => {
-        this.props.removeExpense({ id: this.props.expense.id });
-        this.props.history.push('/');
+        this.props.history.push('/dashboard');
     }
     render() {
         return (
             <div>
-                <ExpenseForm
-                    expense={this.props.expense}
-                    onSubmit={this.onSubmit}
-                />
-                {this.props.expense.id ?
-                    <button onClick={this.onRemove}>Remove</button> :
-                    undefined}
-
+                <div className="page-header">
+                    <div className="content-container">
+                        <h1 className="page-header__title">Edit Expense</h1>
+                    </div>
+                </div>
+                <div className="content-container">
+                    <ExpenseForm
+                        history={this.props.history}
+                        expense={this.props.expense}
+                        onSubmit={this.onSubmit}
+                        mode={'Edit'}
+                    />
+                </div>
             </div>
         );
     }
@@ -32,9 +33,8 @@ export class EditExpensePage extends React.Component {
 
 
 
-const mapDispatchToProps  = (dispatch,props) =>({
-    editExpense: (id,expense)=> dispatch(editExpense(id,expense)),
-    removeExpense: (data)=>dispatch(removeExpense(data))
+const mapDispatchToProps = (dispatch, props) => ({
+    editExpense: (id, expense) => dispatch(editExpense(id, expense)),
 })
 
 const bootstraper = function (state, props) {
@@ -45,4 +45,4 @@ const bootstraper = function (state, props) {
         })
     }
 }
-export default connect(bootstraper,mapDispatchToProps)(EditExpensePage);
+export default connect(bootstraper, mapDispatchToProps)(EditExpensePage);

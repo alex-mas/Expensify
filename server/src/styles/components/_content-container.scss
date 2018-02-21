@@ -1,0 +1,15 @@
+.content-container{
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 $m-size;
+    
+}
+
+
+
+.spaced__content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $s-size 0;
+}
