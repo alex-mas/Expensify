@@ -17,7 +17,7 @@ import './styles/styles.scss';
 //app initialization
 const appRoot = document.getElementById('app');
 const store = configureStore();
-const jsx = (
+const App = (
     <Provider store={store}>
         <AppRouter />
     </Provider>
@@ -27,7 +27,7 @@ const jsx = (
 let hasRendered = false;
 const renderApp =()=>{
     if(!hasRendered){
-        ReactDOM.render(jsx, appRoot);
+        ReactDOM.render(App, appRoot);
         hasRendered = true;
     }
 }

@@ -29,7 +29,7 @@ export class ExpensesChart extends React.Component {
             type: 'bar',
             data: {
                 labels: this.props.expenses.map((expense) => {
-                    return moment(expense.createdAt).format("dd/M - YY");
+                    return expense.description + ' (' + moment(expense.createdAt).format("dd/M - YY")  + ')';
                 }),
                 datasets: [{
                     label: 'Expenses',
